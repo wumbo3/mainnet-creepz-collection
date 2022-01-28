@@ -1,0 +1,67 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Creepz
+    network: mainnet
+    source:
+      address: "0xfe8c6d19365453d26af321d0e8c910428c23873f"
+      abi: Creepz
+      startBlock: 13953072
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Creep
+        - Owner
+      abis:
+        - name: Creepz
+          file: ./abis/Creepz.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleCreepzTransfer
+      file: ./src/mapping.ts
+  - kind: ethereum
+    name: ReptileArmoury
+    network: mainnet
+    source:
+      address: "0x5f4a54E29ccb8a02CDF7D7BFa8a0999A8330CCeD"
+      abi: ReptileArmoury
+      startBlock: 14041726
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Armoury
+        - Owner
+      abis:
+        - name: ReptileArmoury
+          file: ./abis/ReptileArmoury.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleArmouryTransfer
+      file: ./src/mapping.ts
+  - kind: ethereum
+    name: ShapeShifters
+    network: mainnet
+    source:
+      address: "0xF1083e064F92db0561fd540F982Cbf73A4e2F8f6"
+      abi: ShapeShifters
+      startBlock: 14076045
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - ShapeShifter
+        - Owner
+      abis:
+        - name: ShapeShifters
+          file: ./abis/ShapeShifters.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleShapeShifterTransfer
+      file: ./src/mapping.ts
