@@ -10,11 +10,11 @@ import {
   Transfer as ShapeshifterTransferEvent,
   ShapeShifters as ShapeShifterContract
 } from "../generated/ShapeShifters/ShapeShifters"
-// import {
-//   Transfer as MegaShapeshifterTransferEvent,
-//   TokensMinted as MegaShapeShiftersMintedEvent,
-//   MegaShapeShifters as MegaShapeShifterContract
-// } from "../generated/MegaShapeShifters/MegaShapeShifters"
+import {
+  Transfer as MegaShapeshifterTransferEvent,
+  TokensMinted as MegaShapeShiftersMintedEvent,
+  MegaShapeShifters as MegaShapeShifterContract
+} from "../generated/MegaShapeShifters/MegaShapeShifters"
 import { Armoury, Creep, ShapeShifter, MegaShapeShifter, Owner } from "../generated/schema"
 
 export function handleCreepzTransfer(event: CreepzTransferEvent): void {
@@ -62,37 +62,37 @@ export function handleShapeShifterTransfer(event: ShapeshifterTransferEvent): vo
   handleNewOwner(event.params.to.toHexString());
 }
 
-// export function handleMegaShapeShifterTransfer(event: MegaShapeshifterTransferEvent): void {
-//   let token = MegaShapeShifter.load(event.params.tokenId.toString());
-//   if (!token) {
-//     token = new MegaShapeShifter(event.params.tokenId.toString());
-//     token.createdAtTimestamp = event.block.timestamp;
+export function handleMegaShapeShifterTransfer(event: MegaShapeshifterTransferEvent): void {
+  let token = MegaShapeShifter.load(event.params.tokenId.toString());
+  if (!token) {
+    token = new MegaShapeShifter(event.params.tokenId.toString());
+    token.createdAtTimestamp = event.block.timestamp;
   
-//     let contract = MegaShapeShifterContract.bind(event.address);
-//     token.contentURI = contract.tokenURI(event.params.tokenId);
-//     token.type = contract.tokenTypes(event.params.tokenId);
-//   }
-//   token.megaShapeShifterOwner = event.params.to.toHexString();
-//   token.save();
+    let contract = MegaShapeShifterContract.bind(event.address);
+    token.contentURI = contract.tokenURI(event.params.tokenId);
+    token.type = contract.tokenTypes(event.params.tokenId);
+  }
+  token.megaShapeShifterOwner = event.params.to.toHexString();
+  token.save();
 
-//   handleNewOwner(event.params.to.toHexString());
-// }
+  handleNewOwner(event.params.to.toHexString());
+}
 
-// export function handleMegaShapeShiftersMinted(event: MegaShapeShiftersMintedEvent): void {
-//   let token = MegaShapeShifter.load(event.params.tokenId.toString());
-//   if (!token) {
-//     token = new MegaShapeShifter(event.params.tokenId.toString());
-//     token.createdAtTimestamp = event.block.timestamp;
+export function handleMegaShapeShiftersMinted(event: MegaShapeShiftersMintedEvent): void {
+  let token = MegaShapeShifter.load(event.params.tokenId.toString());
+  if (!token) {
+    token = new MegaShapeShifter(event.params.tokenId.toString());
+    token.createdAtTimestamp = event.block.timestamp;
 
-//     let contract = MegaShapeShifterContract.bind(event.address);
-//     token.contentURI = contract.tokenURI(event.params.tokenId);
-//     token.type = contract.tokenTypes(event.params.tokenId);
-//   }
-//   token.megaShapeShifterOwner = event.params.mintedBy.toHexString();
-//   token.save();
+    let contract = MegaShapeShifterContract.bind(event.address);
+    token.contentURI = contract.tokenURI(event.params.tokenId);
+    token.type = contract.tokenTypes(event.params.tokenId);
+  }
+  token.megaShapeShifterOwner = event.params.mintedBy.toHexString();
+  token.save();
 
-//   handleNewOwner(event.params.mintedBy.toHexString());
-// }
+  handleNewOwner(event.params.mintedBy.toHexString());
+}
 
 function handleNewOwner(newOwnerAddress: string): void {
   let owner = Owner.load(newOwnerAddress);

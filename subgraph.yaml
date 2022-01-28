@@ -65,26 +65,26 @@ dataSources:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleShapeShifterTransfer
       file: ./src/mapping.ts
-  # - kind: ethereum
-  #   name: MegaShapeShifters
-  #   network: mainnet
-  #   source:
-  #     address: ""
-  #     abi: MegaShapeShifters
-  #     startBlock: 10068927
-  #   mapping:
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.5
-  #     language: wasm/assemblyscript
-  #     entities:
-  #       - MegaShapeShifter
-  #       - Owner
-  #     abis:
-  #       - name: MegaShapeShifters
-  #         file: ./abis/MegaShapeShifters.json
-  #     eventHandlers:
-  #       - event: Transfer(indexed address,indexed address,indexed uint256)
-  #         handler: handleMegaShapeShifterTransfer
-  #       - event: TokensMinted(indexed address,indexed uint256,uint256)
-  #         handler: handleMegaShapeShiftersMinted
-  #     file: ./src/mapping.ts
+  - kind: ethereum
+    name: MegaShapeShifters
+    network: mainnet
+    source:
+      address: "0xD6D80461b1875A8679Fe789db689156F42B7f86B"
+      abi: MegaShapeShifters
+      startBlock: 14095287
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - MegaShapeShifter
+        - Owner
+      abis:
+        - name: MegaShapeShifters
+          file: ./abis/MegaShapeShifters.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleMegaShapeShifterTransfer
+        - event: TokensMinted(indexed address,indexed uint256,uint256)
+          handler: handleMegaShapeShiftersMinted
+      file: ./src/mapping.ts
